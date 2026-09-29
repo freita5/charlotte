@@ -26,7 +26,7 @@
 	/* sans: UI, rótulos e cartaz. serif: nome do produto. hero: só o título da capa. */
 	--font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
 	--font-serif: "Playfair Display", ui-serif, Georgia, serif;
-	--font-hero: "Bebas Neue", "Archivo", ui-sans-serif, system-ui, sans-serif;
+	--font-hero: "Fraunces", ui-serif, Georgia, serif;
 
 	/* ---- movimento --------------------------------------------------------- */
 	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -124,11 +124,20 @@
    Utilitários
    ========================================================================== */
 
-/** Container com respiro lateral. */
+/** Container com respiro lateral.
+ *
+ *  84rem é a medida de leitura de todo o site e vale nas quatro páginas de
+ *  uma vez — não é um limite por seção. Antes eram 100rem, e acima de 100rem
+ *  o container saltava para `94vw`, o que dava duas espessuras diferentes
+ *  conforme a tela, e a 4K mais de mil pixels de vazio de cada lado.
+ *
+ *  O "Charlotte" gigante do rodapé fica de fora do `shell` de propósito: ele
+ *  é sangria total, do jeito que um logotipo de rodapé costuma ser.
+ */
 @utility shell {
 	margin-inline: auto;
 	width: 100%;
-	max-width: 100rem;
+	max-width: 84rem;
 	padding-inline: 1.25rem;
 
 	@media (width >= 48rem) {
@@ -137,18 +146,6 @@
 
 	@media (width >= 80rem) {
 		padding-inline: 3.5rem;
-	}
-
-	/* Acima de 1600px, um max-width fixo deixa uma faixa enorme de vazio dos
-	   dois lados — em 4K são mais de mil pixels. A partir daqui o container
-	   segue a tela. */
-	@media (width >= 100rem) {
-		max-width: 94vw;
-		padding-inline: 5rem;
-	}
-
-	@media (width >= 150rem) {
-		padding-inline: 6rem;
 	}
 }
 
@@ -172,15 +169,21 @@
 	line-height: 0.86;
 }
 
-/** O título da capa. A mesma Archivo, puxada para o fim do eixo de largura
- *  e para o peso máximo: vira uma caixa alta e estreita, bem mais alta que
- *  larga, que é o que segura a frase inteira em tela grande e em celular. */
+/** O título da capa. Uma serifada de verdade no lugar do cartaz: a Fraunces
+ *  puxada para o corpo médio, com as pontas amolecidas (SOFT) e as letras
+ *  tortas do desenho (WONK) — daí ela ter cara de coisa feita à mão, e não
+ *  de placa de rua. `opsz` no fim do eixo porque aqui o corpo é sempre
+ *  grande: é o corte de display, com o fio fininho, que segura o creme em
+ *  cima do vermelho. O `letter-spacing` negativo fecha a caixa — a Fraunces
+ *  abre muito espaço entre as letras — e a entrelinha é 1 porque o acento do
+ *  Ó e o rabinho do Q precisam de ar que a Bebas, toda reta, não pedia. */
 @utility poster-hero {
 	font-family: var(--font-hero);
-	font-weight: 400;
+	font-weight: 600;
+	font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
 	text-transform: uppercase;
-	letter-spacing: 0.005em;
-	line-height: 0.86;
+	letter-spacing: -0.035em;
+	line-height: 1;
 }
 
 @utility grain {

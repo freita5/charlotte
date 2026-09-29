@@ -1,21 +1,22 @@
 import { motion } from "motion/react";
 import Map from "../components/Map";
 import Reveal from "../components/Reveal";
+import OpenBadge from "../components/OpenBadge";
 import { instagramHandle, site } from "../data/site";
 import { localMapVariants, stagger } from "../variants";
 
 const directions = [
 	{
 		title: "De carro",
-		text: "Av. Dr. Nilo Peçanha, 67, no Parque Santo Amaro. Estacionamento na frente da loja.",
+		text: "Av. Dr. Nilo Peçanha, 67, no Parque Santo Amaro. Tem estacionamento na frente da loja.",
 	},
 	{
 		title: "A pé",
-		text: "Estamos a duas quadras da praça central, no coração do bairro. Facilinho de achar.",
+		text: "Duas quadras da praça central, no coração do bairro. Difícil passar ali sem ver a vitrine.",
 	},
 	{
 		title: "Retirada",
-		text: "Deixe o pedido no WhatsApp e é só passar no balcão. Encomenda pronta fica separada pra você.",
+		text: "Manda seu pedido no WhatsApp antes e a gente deixa separado no balcão, com o seu nome na sacola.",
 	},
 ];
 
@@ -27,6 +28,11 @@ export default function Local() {
 					<h1 className="poster text-[clamp(3rem,11vw,9rem)]">
 						Onde estamos
 					</h1>
+					<p className="mt-6 max-w-2xl text-lg leading-relaxed text-cocoa-700">
+						Balcão no Parque Santo Amaro, com entrega própria em Campos e
+						região. Antes de vir, confere se a gente está aberto — os horários
+						ficam aqui do lado.
+					</p>
 				</Reveal>
 
 				<div className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-14">
@@ -46,7 +52,11 @@ export default function Local() {
 						</Reveal>
 
 						<Reveal delay={0.05}>
-							<dl className="mt-10 border-t border-cocoa-900/20">
+							<div className="mt-10 flex items-baseline justify-between gap-6 border-t border-cocoa-900/20 pt-4">
+								<p className="tag text-cocoa-500">Horários do balcão</p>
+								<OpenBadge className="text-cocoa-500" />
+							</div>
+							<dl>
 								{site.hours.map((hour) => (
 									<div
 										key={hour.days}

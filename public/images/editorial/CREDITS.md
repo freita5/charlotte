@@ -45,8 +45,8 @@ repositório. Elas não entram no build: o Vite copia `public/` inteiro para
 (`logo.png` é a versão clara, usada sobre fundo vermelho; `logo-red.png` a
 versão de marca, usada sobre papel). O `favicon.svg` tem o C embutido.
 
-Tipografia: [Bebas Neue](https://fonts.google.com/specimen/Bebas+Neue)
-(cartaz da capa), [Archivo](https://fonts.google.com/specimen/Archivo) (UI,
-rótulos, seções) e
+Tipografia: [Fraunces](https://fonts.google.com/specimen/Fraunces) (cartaz
+da capa, fonte variável com eixos `opsz`, `SOFT` e `WONK`),
+[Archivo](https://fonts.google.com/specimen/Archivo) (UI, rótulos, seções) e
 [Playfair Display](https://fonts.google.com/specimen/Playfair+Display) (nome
 do produto) — Google Fonts, SIL Open Font License.

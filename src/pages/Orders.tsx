@@ -2,26 +2,35 @@ import Reveal from "../components/Reveal";
 import { hoursLine, site } from "../data/site";
 import { useCart } from "../cart/useCart";
 
+/* FAQ responde as objeções que aparecem no WhatsApp antes de qualquer
+   compra: como pedir, quanto é o mínimo, se entrega, quanto tempo leva.
+   Toda resposta aqui é verificável no cardápio ou nos horários — nada de
+   promessa que o balcão não consiga cumprir. */
 const faq = [
 	{
 		question: "Como faço para pedir?",
 		answer:
-			"Monte sua sacola aqui no site e mande pelo WhatsApp — a lista vai com os produtos e as quantidades já escritas. Ou, se preferir, feche o pedido no iFood, que resolve entrega e pagamento.",
+			"Monte seu pedido aqui no site e mande pelo WhatsApp — a lista vai com os produtos e as quantidades já escritas, e a gente confirma a disponibilidade na hora. Ou, se preferir, feche o pedido no iFood, que resolve entrega e pagamento.",
 	},
 	{
 		question: "Qual é o pedido mínimo?",
 		answer:
-			"R$ 25,00. A sacola avisa quanto falta para bater o mínimo antes de você enviar.",
+			"R$ 25,00. O seu pedido avisa quanto falta para bater o mínimo antes de você enviar, então dá pra montar sem medo de errar a conta.",
 	},
 	{
 		question: "Vocês entregam?",
 		answer:
-			"Entrega própria em Campos e região. Para cidades vizinhas, o iFood calcula o frete e o prazo.",
+			"Sim. Entrega própria em Campos e região, ou você retira no balcão do Parque Santo Amaro. Para cidades vizinhas, o iFood calcula o frete e o prazo.",
 	},
 	{
 		question: "Com quanto de antecedência devo pedir?",
 		answer:
 			"Para torta no pote, biscoitinho e doses, 48 horas resolvem. Para datas grandes e encomendas sob medida, uma semana.",
+	},
+	{
+		question: "Fazem encomenda para festa e evento?",
+		answer:
+			"Fazem. Doce no Tabuleiro serve até 8 pessoas, baby cake vai em caixa presenteável e a gente monta mesa de doces sob medida. Chama com 48h de antecedência e conta o que você imaginou.",
 	},
 	{
 		question: "Dá para pedir sem lactose ou sem glúten?",
@@ -50,8 +59,9 @@ export default function Orders() {
 					className="mt-10 flex flex-col gap-6 border-t border-cocoa-900/20 pt-8 lg:flex-row lg:items-end lg:justify-between"
 				>
 					<p className="max-w-2xl text-lg leading-relaxed text-cocoa-700">
-						Monte a sacola no cardápio e mande pelo WhatsApp, ou feche tudo
-						dentro do iFood. As duas rotas chegam na mesma cozinha.
+						Monte seu pedido no cardápio e mande pelo WhatsApp, ou feche tudo
+						dentro do iFood. As duas rotas saem da mesma cozinha — o que muda é
+						quem resolve a entrega e o pagamento.
 					</p>
 					<p className="tag shrink-0 text-cocoa-500">{hoursLine}</p>
 				</Reveal>
@@ -76,7 +86,7 @@ export default function Orders() {
 								</span>
 							</span>
 							<span className="tag relative flex items-center gap-3 text-cocoa-900 transition-colors duration-500 group-hover:text-paper">
-								Abrir a sacola
+								Abrir meu pedido
 								<span className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5">
 									→
 								</span>
@@ -106,8 +116,8 @@ export default function Orders() {
 
 							<span className="relative flex flex-col gap-4 sm:max-w-xs sm:items-end">
 								<span className="text-sm leading-relaxed text-cocoa-500 transition-colors duration-500 group-hover:text-paper/80 sm:text-right">
-									Entrega e pagamento resolvidos dentro do app. Suporta
-									clientes novos e o Pix na entrega.
+									Entrega e pagamento resolvidos lá dentro, com Pix na entrega e
+									cupom para quem pede pela primeira vez.
 								</span>
 								<span className="tag flex items-center gap-3 text-cocoa-900 transition-colors duration-500 group-hover:text-paper">
 									Abrir o iFood

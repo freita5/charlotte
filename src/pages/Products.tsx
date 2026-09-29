@@ -36,16 +36,17 @@ export default function Products() {
 					className="mt-10 flex flex-col gap-6 border-t border-cocoa-900/20 pt-8 lg:flex-row lg:items-end lg:justify-between"
 				>
 					<p className="max-w-2xl text-lg leading-relaxed text-cocoa-700">
-						O cardápio inteiro do iFood, com o preço que sai na sua tela.
-						Monte sua sacola com o stepper e a lista vai pro WhatsApp. O link
-						de cada item abre o prato certo lá dentro.
+						Tudo o que tem na nossa vitrine, com o preço aparecendo aqui na
+						tela. Some com o + que a lista vai pro WhatsApp já escrita. Item
+						que só existe no balcão, o botão pergunta se tem antes de você
+						ir lá.
 					</p>
 					<button
 						type="button"
 						onClick={openCart}
 						className="tag shrink-0 bg-chrltt-500 px-6 py-4 text-paper transition-colors duration-300 hover:bg-cocoa-900"
 					>
-						Ver sacola
+						Ver meu pedido
 						{count > 0 ? ` · ${count}` : ""}
 						{total > 0 ? ` · ${formatPrice(total)}` : ""}
 					</button>
@@ -75,7 +76,7 @@ export default function Products() {
 
 				{list.length === 0 && (
 					<p className="mt-16 text-center text-cocoa-500">
-						Nada encontrado. Tenta outra palavra ou{" "}
+						Não achamos esse sabor. Tenta outra palavra ou{" "}
 						<button
 							type="button"
 							onClick={() => {
@@ -99,9 +100,10 @@ export default function Products() {
 							Quer algo que não está na lista?
 						</h2>
 						<p className="mt-4 max-w-md text-cocoa-700">
-							A gente monta torta no pote, mesa de doces, baby cake e caixa
-							presente sob medida, a partir de {formatPrice(MINIMUM_ORDER)}.
-							Conta o que você imaginou que a gente resolve.
+							Torta no pote no tamanho que você quiser, mesa de doces, baby
+							cake e caixa presente, a partir de {formatPrice(MINIMUM_ORDER)}.
+							Manda a ideia no WhatsApp que a gente monta e responde com o
+							valor. Para festa e evento, pede 48h de antecedência.
 						</p>
 					</div>
 
@@ -112,7 +114,7 @@ export default function Products() {
 							rel="noreferrer"
 							className="tag bg-chrltt-500 px-6 py-4 text-paper transition-colors duration-300 hover:bg-cocoa-900"
 						>
-							Chamar no WhatsApp
+							Mandar minha ideia no WhatsApp
 						</a>
 						<a
 							href={site.links.ifood}

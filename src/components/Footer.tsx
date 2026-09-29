@@ -24,10 +24,10 @@ export default function Footer() {
 			>
 				<div className="grid gap-12 lg:grid-cols-12">
 					<motion.div variants={footerElementVariants} className="lg:col-span-5">
-						<p className="tag text-paper/50">Fale com a gente</p>
+						<p className="tag text-paper/50">Fale com a gente no WhatsApp</p>
 						<p className="mt-6 max-w-sm text-lg leading-relaxed text-paper/85">
-							Encomenda com 48h de antecedência. Para festas, eventos e
-							presentes, fale antes que o balcão feche.
+							Encomenda sob medida pede 48h de antecedência. Para festa,
+							evento ou presente, manda mensagem antes que o balcão feche.
 						</p>
 						<a
 							href={site.links.whatsapp}

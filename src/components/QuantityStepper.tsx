@@ -3,13 +3,13 @@ import { useCart } from "../cart/useCart";
 
 interface Props {
 	product: IProduct;
-	/** `md` nos cards, `sm` nas linhas de menu e na sacola */
+	/** `md` nos cards, `sm` nas linhas de menu e no carrinho */
 	size?: "sm" | "md";
-	/** escreve "Adicionar" / "N na sacola" no meio em vez do número */
+	/** escreve "Adicionar" / "N no pedido" no meio em vez do número */
 	withLabel?: boolean;
 }
 
-/** Controle de quantidade. Usado no card, na linha do menu e na sacola —
+/** Controle de quantidade. Usado no card, na linha do menu e no carrinho —
  *  mesmo comportamento e mesmo tamanho nos três lugares. */
 export default function QuantityStepper({
 	product,
@@ -43,7 +43,7 @@ export default function QuantityStepper({
 
 			{withLabel ? (
 				<span className="text-sm font-semibold">
-					{inCart ? `${qty} na sacola` : "Adicionar"}
+					{inCart ? `${qty} no pedido` : "Adicionar"}
 				</span>
 			) : (
 				<span className="w-7 text-center text-sm font-semibold tabular-nums">

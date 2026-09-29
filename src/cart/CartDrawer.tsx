@@ -22,7 +22,7 @@ export default function CartDrawer() {
 				<>
 					<motion.button
 						type="button"
-						aria-label="Fechar sacola"
+						aria-label="Fechar pedido"
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
@@ -32,7 +32,7 @@ export default function CartDrawer() {
 
 					<motion.aside
 						role="dialog"
-						aria-label="Sua sacola"
+						aria-label="Seu pedido"
 						initial={{ x: "100%" }}
 						animate={{ x: 0 }}
 						exit={{ x: "100%" }}
@@ -40,7 +40,7 @@ export default function CartDrawer() {
 						className="fixed inset-y-0 right-0 z-[70] flex w-full max-w-[30rem] flex-col bg-paper"
 					>
 						<header className="flex items-center justify-between gap-4 bg-chrltt-500 px-6 py-5 text-paper">
-							<h2 className="poster text-2xl">Sua sacola</h2>
+							<h2 className="poster text-2xl">Seu pedido</h2>
 							<button
 								type="button"
 								onClick={closeCart}
@@ -52,10 +52,10 @@ export default function CartDrawer() {
 
 						{count === 0 ? (
 							<div className="flex grow flex-col items-center justify-center gap-6 px-8 text-center">
-								<p className="poster text-3xl">Vazia por enquanto</p>
-								<p className="max-w-xs text-sm text-cocoa-500">
-									Escolha alguns sabores no cardápio que a gente monta o seu
-									pedido aqui e manda direto no WhatsApp.
+								<p className="poster text-3xl">Seu pedido está vazio</p>
+								<p className="max-w-xs text-sm leading-relaxed text-cocoa-500">
+									Escolha alguns sabores no cardápio. A gente monta a lista
+									aqui e manda direto no WhatsApp, com o total certinho.
 								</p>
 								<button
 									type="button"
@@ -113,10 +113,10 @@ export default function CartDrawer() {
 										</span>
 									</div>
 
-									<p className="mt-3 text-xs text-cocoa-500">
+									<p className="mt-3 text-xs leading-relaxed text-cocoa-500">
 										{ready
-											? `Pedido mínimo de ${formatPrice(MINIMUM_ORDER)} atingido. Pode fechar que a gente responde rapidinho.`
-											: `Faltam ${formatPrice(missing)} para atingir o pedido mínimo de ${formatPrice(MINIMUM_ORDER)}.`}
+											? `Mínimo de ${formatPrice(MINIMUM_ORDER)} atingido. Pode mandar que a gente responde rapidinho.`
+											: `Faltam ${formatPrice(missing)} para atingir o mínimo de ${formatPrice(MINIMUM_ORDER)}.`}
 									</p>
 
 									<div className="mt-5 flex flex-col gap-2">
@@ -131,7 +131,7 @@ export default function CartDrawer() {
 													: "pointer-events-none bg-cocoa-200 text-cocoa-400"
 											}`}
 										>
-											Pedir pelo WhatsApp
+											Mandar pedido no WhatsApp
 										</a>
 										<a
 											href={site.links.ifood}
@@ -146,7 +146,7 @@ export default function CartDrawer() {
 											onClick={clear}
 											className="tag py-3 text-cocoa-400 transition-colors duration-300 hover:text-chrltt-600"
 										>
-											Esvaziar sacola
+											Esvaziar pedido
 										</button>
 									</div>
 								</footer>

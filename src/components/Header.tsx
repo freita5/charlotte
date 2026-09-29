@@ -113,14 +113,14 @@ export default function Header() {
 						<button
 							type="button"
 							onClick={openCart}
-							aria-label={`Abrir sacola (${count} ${count === 1 ? "item" : "itens"})`}
+							aria-label={`Abrir meu pedido (${count} ${count === 1 ? "item" : "itens"})`}
 							className={`tag relative flex items-center gap-2 border px-4 py-2.5 transition-colors duration-300 ${
 								onRed
 									? "border-paper/40 text-paper hover:bg-paper hover:text-chrltt-600"
 									: "border-cocoa-900/25 text-cocoa-900 hover:bg-cocoa-900 hover:text-paper"
 							}`}
 						>
-							Sacola
+							Pedido
 							<span
 								className={`grid h-5 min-w-5 place-items-center px-1 text-[0.625rem] font-bold tabular-nums transition-colors duration-300 ${
 									count > 0
