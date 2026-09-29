@@ -1,29 +1,60 @@
+import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import Header from "./components/Header";
-import Home from "./pages/Home";
 import Footer from "./components/Footer";
+import CartDrawer from "./cart/CartDrawer";
+import CartProvider from "./cart/CartProvider";
+import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Orders from "./pages/Orders";
 import Local from "./pages/Local";
-import { AnimatePresence } from "framer-motion";
+import { pageVariants } from "./variants";
+
+function ScrollToTop() {
+	const { pathname } = useLocation();
+
+	useEffect(() => {
+		window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+	}, [pathname]);
+
+	return null;
+}
 
 function App() {
 	const location = useLocation();
+
 	return (
-		<div className="flex flex-col gap-5 md:gap-0 items-center bg-neutral-300 font-montserrat min-h-[100dvh] h-full relative overflow-x-hidden md:overflow-y-hidden">
-			<Header />
-			<div className="main flex flex-col justify-center grow container relative h-full">
-				<AnimatePresence mode="wait">
-					<Routes key={location.pathname} location={location}>
-						<Route path="/" element={<Home />} />
-						<Route path="/produtos" element={<Products />} />
-						<Route path="/encomendas" element={<Orders />} />
-						<Route path="/localizacao" element={<Local />} />
-					</Routes>
-				</AnimatePresence>
-			</div>
-			<Footer />
-		</div>
+		<MotionConfig reducedMotion="user">
+			<CartProvider>
+				<div className="relative flex min-h-[100dvh] flex-col bg-paper">
+					<Header />
+					<ScrollToTop />
+
+					<main className="flex-1">
+						<AnimatePresence mode="wait">
+							<motion.div
+								key={location.pathname}
+								variants={pageVariants}
+								initial="hidden"
+								animate="visible"
+								exit="exit"
+							>
+								<Routes location={location}>
+									<Route path="/" element={<Home />} />
+									<Route path="/produtos" element={<Products />} />
+									<Route path="/encomendas" element={<Orders />} />
+									<Route path="/localizacao" element={<Local />} />
+								</Routes>
+							</motion.div>
+						</AnimatePresence>
+					</main>
+
+					<Footer />
+					<CartDrawer />
+				</div>
+			</CartProvider>
+		</MotionConfig>
 	);
 }
 

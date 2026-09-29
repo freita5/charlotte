@@ -1,31 +1,16 @@
-import { Variants } from "framer-motion";
+import type { Variants } from "motion/react";
+import { EASE } from "./sharedVariants";
 
 export const footerVariants: Variants = {
-	initial: {
-		y: 100,
-	},
-	animate: {
+	hidden: { opacity: 0, y: 40 },
+	visible: {
+		opacity: 1,
 		y: 0,
-		transition: {
-			type: "spring",
-			bounce: 0,
-			duration: 0.4,
-			when: "beforeChildren",
-			staggerChildren: 0.1,
-		},
+		transition: { duration: 0.8, ease: EASE, staggerChildren: 0.1 },
 	},
 };
 
 export const footerElementVariants: Variants = {
-	initial: {
-		y: 100,
-	},
-	animate: {
-		y: 0,
-		transition: {
-			type: "spring",
-			bounce: 0.2,
-			duration: 0.4,
-		},
-	},
+	hidden: { opacity: 0, y: 22 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
 };

@@ -1,28 +1,242 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&display=swap");
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+/* ==========================================================================
+   Charlotte — tokens
+   A cor principal (#cf2a31) veio do tailwind.config.cjs antigo e continua
+   valendo: `chrltt`. As demais cores saíram do cardápio oficial da casa.
+   ========================================================================== */
+@theme {
+	/* ---- marca ------------------------------------------------------------ */
+	--color-chrltt-300: #f19a9d;
+	--color-chrltt-500: #cf2a31;
+	--color-chrltt-600: #b21f27;
+	--color-chrltt: var(--color-chrltt-500);
+
+	/* ---- papel (creme do cardápio) ---------------------------------------- */
+	--color-paper: #f0e9e1;
+	--color-paper-2: #e6dbcd;
+
+	/* ---- cacau (texto do cardápio) ---------------------------------------- */
+	--color-cocoa-300: #c2a084;
+	--color-cocoa-500: #8a5a33;
+	--color-cocoa-700: #5d3517;
+	--color-cocoa-900: #2a170b;
+
+	/* ---- tipografia -------------------------------------------------------- */
+	/* sans: UI, rótulos e cartaz. serif: nome do produto. hero: só o título da capa. */
+	--font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+	--font-serif: "Playfair Display", ui-serif, Georgia, serif;
+	--font-hero: "Bebas Neue", "Archivo", ui-sans-serif, system-ui, sans-serif;
+
+	/* ---- movimento --------------------------------------------------------- */
+	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-::-webkit-scrollbar {
-	width: 5px;
-	display: none;
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	html {
+		-webkit-text-size-adjust: 100%;
+		overflow-x: clip;
+	}
+
+	body {
+		margin: 0;
+		background-color: var(--color-paper);
+		color: var(--color-cocoa-900);
+		font-family: var(--font-sans);
+		font-size: 1rem;
+		line-height: 1.55;
+		font-weight: 400;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		overflow-x: clip;
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	button {
+		font: inherit;
+		color: inherit;
+		background: none;
+		border: 0;
+		cursor: pointer;
+	}
+
+	::selection {
+		background-color: var(--color-cocoa-900);
+		color: var(--color-paper);
+	}
+
+	/* a busca já tem botão de limpar próprio */
+	input[type="search"]::-webkit-search-cancel-button {
+		appearance: none;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-chrltt-500);
+		outline-offset: 2px;
+	}
 }
 
-/* ::-webkit-scrollbar-track {
-	background: #f1f1f1;
-} */
-
-/* ::-webkit-scrollbar-thumb {
-	background: #aaa;
-	border-radius: 5px;
+/* Em telas enormes, 11px de rótulo e 24px de botão ficam minsúculos ao lado
+   de um título de 544px. Como quase tudo aqui é `rem`, subir a raiz escala a
+   interface inteira junto. Fica fora do `@layer base` porque o Tailwind
+   descarta `font-size` no `html` de dentro dele. */
+@media (width >= 150rem) {
+	html {
+		font-size: 20px;
+	}
 }
 
-::-webkit-scrollbar-thumb:hover {
-	background: #555;
-} */
+/* ==========================================================================
+   Cabeçalho
+   `--header-h` é a única fonte da altura da barra: o cabeçalho usa na altura e
+   as páginas usam no `padding-top`, então mexer no cabeçalho não obriga a
+   caçar número mágico nas quatro páginas.
+   ========================================================================== */
+:root {
+	--header-h: 4.5rem;
+}
+
+@media (width >= 64rem) {
+	:root {
+		--header-h: 5.25rem;
+	}
+}
+
+/* ==========================================================================
+   Utilitários
+   ========================================================================== */
+
+/** Container com respiro lateral. */
+@utility shell {
+	margin-inline: auto;
+	width: 100%;
+	max-width: 100rem;
+	padding-inline: 1.25rem;
+
+	@media (width >= 48rem) {
+		padding-inline: 2rem;
+	}
+
+	@media (width >= 80rem) {
+		padding-inline: 3.5rem;
+	}
+
+	/* Acima de 1600px, um max-width fixo deixa uma faixa enorme de vazio dos
+	   dois lados — em 4K são mais de mil pixels. A partir daqui o container
+	   segue a tela. */
+	@media (width >= 100rem) {
+		max-width: 94vw;
+		padding-inline: 5rem;
+	}
+
+	@media (width >= 150rem) {
+		padding-inline: 6rem;
+	}
+}
+
+/** Micro-rótulo: tudo que é etiqueta. */
+@utility tag {
+	font-size: 0.6875rem;
+	line-height: 1;
+	font-weight: 500;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+}
+
+/** Cartaz: caixa alta, muito apertado, muito pesado. O tamanho vem sempre
+ *  junto na classe, porque cada título tem a sua escala. */
+@utility poster {
+	font-family: var(--font-sans);
+	font-weight: 800;
+	font-variation-settings: "wdth" 112;
+	text-transform: uppercase;
+	letter-spacing: -0.03em;
+	line-height: 0.86;
+}
+
+/** O título da capa. A mesma Archivo, puxada para o fim do eixo de largura
+ *  e para o peso máximo: vira uma caixa alta e estreita, bem mais alta que
+ *  larga, que é o que segura a frase inteira em tela grande e em celular. */
+@utility poster-hero {
+	font-family: var(--font-hero);
+	font-weight: 400;
+	text-transform: uppercase;
+	letter-spacing: 0.005em;
+	line-height: 0.86;
+}
+
+@utility grain {
+	position: relative;
+	isolation: isolate;
+}
+
+/** Ruído fino de papel, por cima das seções vermelhas. */
+@utility grain-layer {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 2;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+	mix-blend-mode: overlay;
+}
+
+/** Sublinhado que cresce pela esquerda. */
+@utility rule {
+	position: relative;
+
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: -0.15em;
+		height: 1px;
+		width: 100%;
+		background-color: currentColor;
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.5s var(--ease-out-expo);
+	}
+
+	&:hover::after {
+		transform: scaleX(1);
+	}
+}
+
+@utility marquee-track {
+	display: flex;
+	width: max-content;
+	animation: marquee 34s linear infinite;
+}
+
+/* ==========================================================================
+   Keyframes
+   ========================================================================== */
+@keyframes marquee {
+	to {
+		transform: translate3d(-50%, 0, 0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.marquee-track {
+		animation: none !important;
+	}
+}

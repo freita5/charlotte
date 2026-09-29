@@ -1,57 +1,23 @@
-import { Variants } from "framer-motion";
+import type { Variants } from "motion/react";
+import { EASE } from "./sharedVariants";
 
-export const productsContainerVariants: Variants = {
-	initial: {
-		opacity: 0,
-	},
-	animate: {
-		opacity: 1,
-		transition: {
-			staggerChildren: 2,
-		},
-	},
-	exit: {
-		opacity: 0,
-		transition: {
-			staggerChildren: 0.008,
-			staggerDirection: -1,
-			when: "afterChildren",
-		},
-	},
-};
-
-export const productVariants: Variants = {
-	initial: {
-		opacity: 0,
-	},
-	animate: {
-		opacity: 1,
-		transition: {
-			delayChildren: 0.1,
-			staggerChildren: 0.2,
-		},
-	},
-	exit: {
-		opacity: 0,
-		transition: {
-			staggerChildren: 0.1,
-			staggerDirection: -1,
-		},
-	},
-};
-
-export const productImageVariants: Variants = {
-	initial: { opacity: 0 },
-	animate: { opacity: 1 },
-	exit: {
-		opacity: 0,
-	},
-};
-
-export const productNameVariants: Variants = {
-	initial: { opacity: 0 },
-	animate: { opacity: 1 },
-	exit: {
-		opacity: 0,
-	},
-};
+/** Reveal por card. O índice entra como argumento para o grid aparecer em
+ *  cascata, e não tudo de uma vez. */
+export const productVariants = (delay = 0, reduce = false): Variants =>
+	reduce
+		? { hidden: { opacity: 1 }, visible: { opacity: 1 }, exit: { opacity: 1 } }
+		: {
+				hidden: { opacity: 0, y: 30, scale: 0.985 },
+				visible: {
+					opacity: 1,
+					y: 0,
+					scale: 1,
+					transition: { duration: 0.7, ease: EASE, delay },
+				},
+				exit: {
+					opacity: 0,
+					y: -8,
+					scale: 0.98,
+					transition: { duration: 0.25, ease: "easeIn" },
+				},
+			};
